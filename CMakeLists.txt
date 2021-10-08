@@ -27,6 +27,7 @@ if (WIN32)
   # TODO(cmumford): Make UNICODE configurable for Windows.
   add_definitions(-D_UNICODE -DUNICODE)
 else (WIN32)
+  add_compile_options( -fPIC )
   set(LEVELDB_PLATFORM_NAME LEVELDB_PLATFORM_POSIX)
 endif (WIN32)
 
@@ -116,7 +117,7 @@ endif(BUILD_SHARED_LIBS)
 # Must be included before CMAKE_INSTALL_INCLUDEDIR is used.
 include(GNUInstallDirs)
 
-add_library(leveldb "")
+add_library(leveldb STATIC "")
 target_sources(leveldb
   PRIVATE
     "${PROJECT_BINARY_DIR}/${LEVELDB_PORT_CONFIG_DIR}/port_config.h"
